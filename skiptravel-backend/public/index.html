@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SkipTravel — Passagens mais baratas saindo de Manaus</title>
+<meta name="description" content="Combinamos trechos inteligentes para encontrar os melhores preços do mercado. Simples, transparente e sem complicação.">
+
+<!-- Tipografia oficial do Brand Book: Montserrat (títulos) + Inter (texto) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ==========================================================================
+   SKIPTRAVEL — Identidade visual conforme Brand Book 2025
+   Navy Dark dominante (60–70%) · Teal como destaque (20–30%) · Gold só em promoções
+   ========================================================================== */
+:root{
+  --navy-dark:#0F1C32;
+  --navy:#1B2B4B;
+  --navy-mid:#253D6E;
+  --teal:#4ABFB0;
+  --teal-light:#7DD4CA;
+  --teal-pale:#E0F5F3;
+  --gold:#E8A838;
+  --white:#FFFFFF;
+  --grad:linear-gradient(135deg,#0F1C32 0%,#1B2B4B 55%,#253D6E 100%);
+  --font-display:'Montserrat',sans-serif;
+  --font-body:'Inter',sans-serif;
+  --radius:16px;
+  --shadow:0 10px 30px rgba(15,28,50,.12);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);color:var(--navy-dark);background:#F6F8FA;line-height:1.65;font-size:16px}
+h1,h2,h3,h4{font-family:var(--font-display);line-height:1.2;color:var(--navy-dark)}
+img{max-width:100%}
+a{color:var(--teal)}
+.container{max-width:1180px;margin:0 auto;padding:0 24px}
+
+/* ---------- Utilidades ---------- */
+.eyebrow{font-family:var(--font-display);font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);display:block;margin-bottom:14px}
+.section{padding:88px 0}
+.section--alt{background:var(--white)}
+.section-title{font-size:clamp(26px,3.4vw,36px);font-weight:800;margin-bottom:14px}
+.section-sub{color:#51607a;max-width:640px;margin-bottom:48px}
+.center{text-align:center}
+.center .section-sub{margin-left:auto;margin-right:auto}
+
+/* ---------- Botões ---------- */
+.btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-display);font-weight:700;font-size:15px;border:none;border-radius:999px;padding:16px 32px;cursor:pointer;text-decoration:none;transition:.25s;line-height:1}
+.btn--teal{background:var(--teal);color:var(--navy-dark)}
+.btn--teal:hover{background:var(--teal-light);transform:translateY(-2px);box-shadow:0 10px 24px rgba(74,191,176,.35)}
+.btn--outline{background:transparent;color:var(--white);border:2px solid rgba(255,255,255,.35)}
+.btn--outline:hover{border-color:var(--teal);color:var(--teal)}
+.btn--navy{background:var(--navy-dark);color:#fff}
+.btn--navy:hover{background:var(--navy-mid);transform:translateY(-2px)}
+.btn--lg{padding:19px 40px;font-size:16px}
+.btn svg{flex:none}
+
+/* ---------- Header ---------- */
+.header{position:fixed;inset:0 0 auto 0;z-index:1000;background:rgba(15,28,50,.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.06)}
+.header .container{display:flex;align-items:center;justify-content:space-between;height:74px}
+.logo{font-family:var(--font-display);font-weight:800;font-size:22px;letter-spacing:.12em;color:#fff;text-decoration:none;display:flex;align-items:center;gap:10px}
+.logo span{color:var(--teal)}
+.logo svg{flex:none}
+.nav{display:flex;align-items:center;gap:6px}
+.nav a{font-family:var(--font-display);font-size:13px;font-weight:600;letter-spacing:.06em;color:rgba(255,255,255,.78);text-decoration:none;padding:10px 14px;border-radius:8px;transition:.2s}
+.nav a:hover{color:var(--teal)}
+.nav a.active{color:var(--teal)}
+.nav .btn{padding:11px 22px;font-size:13px;margin-left:10px}
+.burger{display:none;background:none;border:none;cursor:pointer;padding:8px}
+.burger span{display:block;width:24px;height:2px;background:#fff;margin:5px 0;border-radius:2px;transition:.3s}
+
+/* ---------- Páginas (SPA) ---------- */
+.page{display:none}
+.page.active{display:block;animation:fadeIn .35s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* ---------- Hero ---------- */
+.hero{background:var(--grad);color:#fff;padding:170px 0 110px;position:relative;overflow:hidden}
+.hero::before,.hero::after{content:"";position:absolute;border:1.5px solid rgba(74,191,176,.28);border-radius:50%}
+.hero::before{width:560px;height:560px;top:-220px;right:-160px}
+.hero::after{width:340px;height:340px;top:-90px;right:-30px;border-color:rgba(74,191,176,.16)}
+.hero__inner{position:relative;z-index:2;max-width:780px}
+.hero h1{color:#fff;font-size:clamp(34px,5.4vw,58px);font-weight:900;margin-bottom:20px}
+.hero h1 em{font-style:normal;color:var(--teal)}
+.hero p{font-size:clamp(16px,2vw,19px);color:rgba(255,255,255,.82);max-width:600px;margin-bottom:36px}
+.hero__ctas{display:flex;gap:16px;flex-wrap:wrap}
+.hero__badges{display:flex;gap:28px;flex-wrap:wrap;margin-top:48px;font-size:14px;color:rgba(255,255,255,.72)}
+.hero__badges div{display:flex;align-items:center;gap:8px}
+.hero__badges svg{color:var(--teal)}
+
+/* ---------- Buscador ---------- */
+.search-card{background:#fff;border-radius:20px;box-shadow:0 24px 60px rgba(15,28,50,.35);padding:26px;margin-top:-58px;position:relative;z-index:5}
+.search-card form{display:grid;grid-template-columns:1.25fr 44px 1.25fr .85fr .85fr .9fr auto;gap:10px;align-items:end}
+.search-card form.no-volta{grid-template-columns:1.25fr 44px 1.25fr 1fr 1fr auto}
+.field label{display:block;font-family:var(--font-display);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--navy-mid);margin-bottom:7px}
+.field input,.field select{width:100%;padding:14px 16px;border:1.5px solid #DDE4EC;border-radius:12px;font-family:var(--font-body);font-size:15px;color:var(--navy-dark);background:#fff;transition:.2s}
+.field input:focus,.field select:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(74,191,176,.18)}
+.search-card .btn{height:52px;justify-content:center}
+.search-note{font-size:13px;color:#7b8aa3;margin-top:14px;display:flex;align-items:center;gap:7px}
+.search-note svg{color:var(--teal);flex:none}
+
+/* Abas de tipo de viagem (padrão Azul) */
+.trip-tabs{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap}
+.trip-tab{font-family:var(--font-display);font-weight:700;font-size:13px;padding:9px 20px;border-radius:999px;border:1.5px solid #DDE4EC;background:#fff;color:var(--navy-mid);cursor:pointer;transition:.2s}
+.trip-tab.active{background:var(--navy-dark);border-color:var(--navy-dark);color:#fff}
+
+/* Botão de inverter origem/destino */
+.swap{width:44px;height:51px;border:1.5px solid #DDE4EC;border-radius:12px;background:#fff;color:var(--teal);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s;padding:0}
+.swap:hover{border-color:var(--teal);background:var(--teal-pale)}
+
+/* Autocomplete mundial */
+.field{position:relative}
+.ac-list{position:absolute;top:calc(100% + 6px);left:0;right:0;min-width:240px;background:#fff;border:1.5px solid #DDE4EC;border-radius:12px;box-shadow:0 16px 40px rgba(15,28,50,.18);z-index:60;max-height:264px;overflow:auto;display:none}
+.ac-list.show{display:block}
+.ac-item{padding:11px 14px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:14px;color:var(--navy-dark)}
+.ac-item:hover,.ac-item.sel{background:var(--teal-pale)}
+.ac-item b{font-family:var(--font-display);font-size:11.5px;color:#fff;background:var(--navy-mid);padding:3px 8px;border-radius:6px;letter-spacing:.06em}
+.ac-item small{color:#7b8aa3;display:block;font-size:12px}
+
+/* Estado de carregamento e aviso nos resultados */
+.loading{display:flex;align-items:center;gap:12px;padding:26px 4px;color:#51607a;font-weight:600}
+.spinner{width:22px;height:22px;border:3px solid var(--teal-pale);border-top-color:var(--teal);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.notice{background:var(--teal-pale);border:1px solid var(--teal-light);border-radius:14px;padding:18px 22px;font-size:14px;color:var(--navy-dark);margin-bottom:16px;display:flex;gap:12px;align-items:flex-start}
+.notice svg{color:var(--teal);flex:none;margin-top:2px}
+
+/* ---------- Resultados da busca ---------- */
+.results{margin-top:34px;display:none}
+.results.show{display:block;animation:fadeIn .35s ease}
+.results h3{font-size:20px;margin-bottom:18px}
+.flight{background:#fff;border:1px solid #E6ECF2;border-radius:var(--radius);padding:22px 26px;display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:14px;flex-wrap:wrap;transition:.25s}
+.flight:hover{box-shadow:var(--shadow);transform:translateY(-3px);border-color:var(--teal)}
+.flight__route{display:flex;align-items:center;gap:14px;font-family:var(--font-display);font-weight:700;font-size:17px}
+.flight__route svg{color:var(--teal)}
+.flight__meta{font-size:13.5px;color:#67768f;margin-top:4px}
+.flight__price{text-align:right}
+.flight__price small{display:block;font-size:12px;color:#67768f}
+.flight__price strong{font-family:var(--font-display);font-size:28px;font-weight:800;color:var(--navy-dark)}
+.flight__price strong b{color:var(--teal)}
+.flight .btn{padding:13px 24px;font-size:13px}
+
+/* ---------- Cards "Por quê" ---------- */
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.feature{background:#fff;border:1px solid #E6ECF2;border-radius:var(--radius);padding:32px 26px;transition:.25s}
+.feature:hover{transform:translateY(-5px);box-shadow:var(--shadow);border-color:var(--teal)}
+.feature__icon{width:52px;height:52px;border-radius:14px;background:var(--teal-pale);display:flex;align-items:center;justify-content:center;color:var(--teal);margin-bottom:20px}
+.feature h3{font-size:17px;font-weight:700;margin-bottom:10px}
+.feature p{font-size:14.5px;color:#51607a}
+
+/* ---------- Rotas / preços reais ---------- */
+.routes{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.route-card{background:var(--grad);border-radius:20px;padding:30px 28px;color:#fff;position:relative;overflow:hidden;transition:.25s}
+.route-card::after{content:"";position:absolute;width:190px;height:190px;border:1.5px solid rgba(74,191,176,.25);border-radius:50%;top:-70px;right:-60px}
+.route-card:hover{transform:translateY(-5px);box-shadow:0 18px 44px rgba(15,28,50,.35)}
+.route-card .pill{display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--teal);color:var(--teal);font-family:var(--font-display);font-size:12px;font-weight:700;letter-spacing:.14em;padding:7px 16px;border-radius:999px;margin-bottom:22px}
+.route-card h3{color:#fff;font-size:21px;font-weight:700;margin-bottom:4px}
+.route-card .from{font-size:13px;color:rgba(255,255,255,.65)}
+.route-card .price{font-family:var(--font-display);font-weight:900;font-size:38px;margin:14px 0 4px}
+.route-card .price small{font-size:14px;font-weight:600;color:rgba(255,255,255,.7)}
+.route-card .price b{color:var(--teal)}
+.route-card .obs{font-size:12px;color:rgba(255,255,255,.55);margin-bottom:22px}
+.route-card .btn{width:100%;justify-content:center}
+
+/* ---------- Como funciona (teaser) ---------- */
+.how-teaser{background:var(--grad);border-radius:24px;color:#fff;padding:64px 56px;display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:center;position:relative;overflow:hidden}
+.how-teaser::before{content:"";position:absolute;width:420px;height:420px;border:1.5px solid rgba(74,191,176,.2);border-radius:50%;bottom:-180px;left:-140px}
+.how-teaser h2{color:#fff;font-size:clamp(24px,3vw,32px);margin-bottom:16px}
+.how-teaser p{color:rgba(255,255,255,.8);margin-bottom:30px}
+.how-teaser__visual{display:flex;flex-direction:column;gap:14px;position:relative;z-index:2}
+.leg{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:16px 20px;display:flex;align-items:center;gap:14px;font-family:var(--font-display);font-weight:600;font-size:14px}
+.leg svg{color:var(--teal);flex:none}
+.leg--used{border-color:var(--teal);background:rgba(74,191,176,.12)}
+.leg .tag{margin-left:auto;font-size:10.5px;letter-spacing:.12em;font-weight:700;padding:5px 12px;border-radius:999px}
+.leg--used .tag{background:var(--teal);color:var(--navy-dark)}
+.leg--skip .tag{background:rgba(255,255,255,.14);color:rgba(255,255,255,.6)}
+.leg--skip{opacity:.6}
+
+/* ---------- Depoimentos ---------- */
+.testimonials{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.tcard{background:#fff;border:1px solid #E6ECF2;border-radius:var(--radius);padding:30px 26px}
+.tcard .stars{color:var(--gold);letter-spacing:3px;font-size:15px;margin-bottom:14px}
+.tcard p{font-size:14.5px;color:#3c4b63;margin-bottom:20px}
+.tcard .who{display:flex;align-items:center;gap:12px}
+.tcard .avatar{width:42px;height:42px;border-radius:50%;background:var(--grad);color:var(--teal);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;font-size:15px}
+.tcard .who strong{font-family:var(--font-display);font-size:14px;display:block}
+.tcard .who small{font-size:12.5px;color:#7b8aa3}
+
+/* ---------- CTA final ---------- */
+.cta-final{background:var(--grad);color:#fff;text-align:center;padding:96px 24px;position:relative;overflow:hidden}
+.cta-final::before{content:"";position:absolute;width:520px;height:520px;border:1.5px solid rgba(74,191,176,.22);border-radius:50%;top:-260px;left:50%;transform:translateX(-50%)}
+.cta-final h2{color:#fff;font-size:clamp(26px,3.6vw,40px);margin-bottom:16px;position:relative}
+.cta-final p{color:rgba(255,255,255,.8);max-width:540px;margin:0 auto 36px;position:relative}
+
+/* ---------- Página Como Funciona ---------- */
+.page-hero{background:var(--grad);color:#fff;padding:160px 0 80px;position:relative;overflow:hidden}
+.page-hero::before{content:"";position:absolute;width:460px;height:460px;border:1.5px solid rgba(74,191,176,.25);border-radius:50%;top:-180px;right:-120px}
+.page-hero h1{color:#fff;font-size:clamp(30px,4.4vw,46px);margin-bottom:14px}
+.page-hero p{color:rgba(255,255,255,.8);max-width:600px;font-size:17px}
+.problem-solution{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.ps-card{border-radius:20px;padding:38px 34px}
+.ps-card--problem{background:#fff;border:1px solid #E6ECF2}
+.ps-card--solution{background:var(--grad);color:#fff}
+.ps-card--solution h3,.ps-card--solution p{color:#fff}
+.ps-card--solution p{color:rgba(255,255,255,.82)}
+.ps-card h3{font-size:20px;margin:18px 0 12px}
+.ps-card .num{font-family:var(--font-display);font-weight:900;font-size:15px;width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center}
+.ps-card--problem .num{background:var(--teal-pale);color:var(--teal)}
+.ps-card--solution .num{background:var(--teal);color:var(--navy-dark)}
+.result-strip{margin-top:22px;background:var(--teal);border-radius:20px;padding:28px 34px;display:flex;align-items:center;gap:18px;color:var(--navy-dark)}
+.result-strip svg{flex:none}
+.result-strip strong{font-family:var(--font-display);font-size:19px}
+
+/* Passo a passo */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;counter-reset:step}
+.step{background:#fff;border:1px solid #E6ECF2;border-radius:var(--radius);padding:34px 26px;position:relative;transition:.25s}
+.step:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+.step::before{counter-increment:step;content:"0" counter(step);font-family:var(--font-display);font-weight:900;font-size:42px;color:var(--teal-pale);position:absolute;top:18px;right:22px;line-height:1}
+.step__icon{width:50px;height:50px;border-radius:14px;background:var(--navy-dark);color:var(--teal);display:flex;align-items:center;justify-content:center;margin-bottom:20px}
+.step h3{font-size:16.5px;margin-bottom:9px}
+.step p{font-size:14px;color:#51607a}
+
+/* FAQ */
+.faq{max-width:760px;margin:0 auto}
+.faq-item{background:#fff;border:1px solid #E6ECF2;border-radius:14px;margin-bottom:12px;overflow:hidden}
+.faq-item button{width:100%;background:none;border:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:22px 26px;font-family:var(--font-display);font-weight:700;font-size:15.5px;color:var(--navy-dark);text-align:left}
+.faq-item button svg{flex:none;color:var(--teal);transition:.3s}
+.faq-item.open button svg{transform:rotate(45deg)}
+.faq-item .answer{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.faq-item .answer p{padding:0 26px 22px;font-size:14.5px;color:#51607a}
+.faq-item.open .answer{max-height:220px}
+
+/* ---------- Sobre Nós ---------- */
+.about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+.about-grid p{color:#3c4b63;margin-bottom:18px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.stat{background:#fff;border:1px solid #E6ECF2;border-radius:var(--radius);padding:30px 26px;text-align:center}
+.stat strong{font-family:var(--font-display);font-weight:900;font-size:34px;color:var(--teal);display:block}
+.stat span{font-size:13.5px;color:#51607a}
+.values{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+
+/* ---------- Footer ---------- */
+.footer{background:var(--navy-dark);color:rgba(255,255,255,.7);padding:70px 0 0}
+.footer__grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1.3fr;gap:40px;padding-bottom:48px}
+.footer h4{color:#fff;font-size:14px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:18px}
+.footer a{color:rgba(255,255,255,.7);text-decoration:none;display:block;margin-bottom:11px;font-size:14.5px;transition:.2s}
+.footer a:hover{color:var(--teal)}
+.footer .logo{margin-bottom:16px}
+.footer .tagline{font-size:14px;max-width:280px}
+.footer__social{display:flex;gap:12px;margin-top:20px}
+.footer__social a{width:40px;height:40px;border:1px solid rgba(255,255,255,.18);border-radius:10px;display:flex;align-items:center;justify-content:center;margin:0}
+.footer__social a:hover{border-color:var(--teal);color:var(--teal)}
+.footer__bottom{border-top:1px solid rgba(255,255,255,.08);padding:22px 0;font-size:13px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.footer__bottom span b{color:var(--teal);font-weight:600}
+
+/* ---------- WhatsApp flutuante ---------- */
+.wa-float{position:fixed;right:22px;bottom:22px;z-index:1200;width:62px;height:62px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;color:#fff;box-shadow:0 10px 30px rgba(37,211,102,.45);transition:.25s;animation:pulse 2.4s infinite}
+.wa-float:hover{transform:scale(1.08)}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(37,211,102,.45)}70%{box-shadow:0 0 0 18px rgba(37,211,102,0)}100%{box-shadow:0 0 0 0 rgba(37,211,102,0)}}
+.wa-float .tooltip{position:absolute;right:74px;background:var(--navy-dark);color:#fff;font-size:13px;font-weight:600;padding:9px 16px;border-radius:10px;white-space:nowrap;opacity:0;pointer-events:none;transition:.25s}
+.wa-float:hover .tooltip{opacity:1}
+
+/* ---------- Responsivo ---------- */
+@media(max-width:1024px){
+  .grid-4{grid-template-columns:repeat(2,1fr)}
+  .routes,.testimonials,.values{grid-template-columns:repeat(2,1fr)}
+  .steps{grid-template-columns:repeat(2,1fr)}
+  .search-card form,.search-card form.no-volta{grid-template-columns:1fr 1fr;gap:14px}
+  .search-card .btn{grid-column:1/-1}
+  .swap{display:none}
+  .how-teaser{grid-template-columns:1fr;padding:48px 36px}
+  .about-grid{grid-template-columns:1fr;gap:40px}
+  .footer__grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:680px){
+  .section{padding:64px 0}
+  .grid-4,.routes,.testimonials,.steps,.values,.problem-solution{grid-template-columns:1fr}
+  .hero{padding:140px 0 90px}
+  .search-card form,.search-card form.no-volta{grid-template-columns:1fr}
+  .flight{flex-direction:column;align-items:flex-start}
+  .flight__price{text-align:left}
+  .nav{position:fixed;top:74px;right:0;left:0;background:var(--navy-dark);flex-direction:column;align-items:stretch;padding:18px 24px 26px;gap:4px;transform:translateY(-130%);transition:.35s;border-bottom:1px solid rgba(255,255,255,.08)}
+  .nav.open{transform:none}
+  .nav a{padding:13px 10px}
+  .nav .btn{margin:12px 0 0;justify-content:center}
+  .burger{display:block}
+  .footer__grid{grid-template-columns:1fr}
+  .how-teaser{padding:40px 26px}
+}
+</style>
+</head>
+<body>
+<!-- ===================== HEADER ===================== -->
+<header class="header">
+  <div class="container">
+    <a class="logo" href="#home" data-nav="home">
+      <!-- Símbolo: asa estilizada (linha fina, traço teal) -->
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#4ABFB0" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l7-2 4-7 2 1-2 7 6 2 1 2-8 1-3 5-2-1 1-5-6-1z"/></svg>
+      SKIP<span>TRAVEL</span>
+    </a>
+    <button class="burger" id="burger" aria-label="Abrir menu"><span></span><span></span><span></span></button>
+    <nav class="nav" id="nav">
+      <a href="#home" data-nav="home" class="active">Início</a>
+      <a href="#como-funciona" data-nav="como-funciona">Como Funciona</a>
+      <a href="#passagens" data-nav="passagens">Passagens</a>
+      <a href="#sobre" data-nav="sobre">Sobre Nós</a>
+      <a href="#" class="btn btn--teal js-wa" data-msg="Olá! Quero consultar uma passagem com a SkipTravel ✈️">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm5.4 14.1c-.2.7-1.3 1.3-1.8 1.3-.5.1-1.1.1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.4.2.5.7 1.8.8 1.9.1.1.1.3 0 .4-.1.2-.1.3-.3.5l-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1.2-.2.7-.8.9-1.1.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg>
+        WhatsApp
+      </a>
+    </nav>
+  </div>
+</header>
+
+<!-- ===================== PÁGINA: HOME ===================== -->
+<main>
+<section class="page active" id="page-home">
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="container hero__inner">
+      <span class="eyebrow">Passagens aéreas · Manaus, Amazonas</span>
+      <h1>Passagens mais baratas para onde você quiser <em>voar</em>.</h1>
+      <p>Combinamos trechos inteligentes para encontrar os melhores preços do mercado. Simples, transparente e sem complicação.</p>
+      <div class="hero__ctas">
+        <a href="#" class="btn btn--teal btn--lg js-wa" data-msg="Olá! Quero consultar uma passagem com a SkipTravel ✈️">Consultar Passagem Agora</a>
+        <a href="#como-funciona" data-nav="como-funciona" class="btn btn--outline btn--lg">Como funciona?</a>
+      </div>
+      <div class="hero__badges">
+        <div><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Emissão em companhias oficiais</div>
+        <div><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Atendimento humano no WhatsApp</div>
+        <div><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Transparência total</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Buscador simulado -->
+  <div class="container">
+    <div class="search-card">
+      <!-- Tipo de viagem (padrão Azul) -->
+      <div class="trip-tabs" id="tripTabs">
+        <button type="button" class="trip-tab active" data-trip="idaVolta">Ida e volta</button>
+        <button type="button" class="trip-tab" data-trip="ida">Somente ida</button>
+        <button type="button" class="trip-tab" data-trip="volta">Somente volta</button>
+      </div>
+      <form id="searchForm" autocomplete="off">
+        <div class="field">
+          <label>Origem</label>
+          <input type="text" id="fOrigem" value="Manaus (MAO)" data-iata="MAO" placeholder="Cidade ou aeroporto">
+          <div class="ac-list" id="acOrigem"></div>
+        </div>
+        <button type="button" class="swap" id="swapBtn" aria-label="Inverter origem e destino" title="Inverter">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 16V4M7 4L3 8M7 4l4 4M17 8v12M17 20l4-4M17 20l-4-4"/></svg>
+        </button>
+        <div class="field">
+          <label>Destino</label>
+          <input type="text" id="fDestino" placeholder="Qualquer lugar do mundo">
+          <div class="ac-list" id="acDestino"></div>
+        </div>
+        <div class="field"><label>Ida</label><input type="date" id="fData"></div>
+        <div class="field" id="fieldVolta"><label>Volta</label><input type="date" id="fVolta"></div>
+        <div class="field">
+          <label>Passageiros</label>
+          <select id="fPax">
+            <option value="1">1 adulto</option>
+            <option value="2">2 adultos</option>
+            <option value="3">3 adultos</option>
+            <option value="4">4 adultos</option>
+            <option value="5">5 adultos</option>
+            <option value="6">6 adultos</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn--navy">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          Buscar voos
+        </button>
+      </form>
+      <div class="search-note">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        Busca mundial — voos nacionais e internacionais. A emissão é sempre confirmada pelo nosso time no WhatsApp.
+      </div>
+      <div class="results" id="results"></div>
+    </div>
+  </div>
+
+  <!-- Por que SkipTravel -->
+  <section class="section">
+    <div class="container">
+      <span class="eyebrow">Por que SkipTravel?</span>
+      <h2 class="section-title">Por que milhares de pessoas estão escolhendo a SkipTravel</h2>
+      <p class="section-sub">Mais do que preço baixo: um jeito claro e humano de comprar passagem aérea.</p>
+      <div class="grid-4">
+        <div class="feature">
+          <div class="feature__icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l10-10M17 17V7H7"/><path d="M3 21h18" opacity="0"/></svg></div>
+          <h3>Preços mais baixos</h3>
+          <p>Combinamos trechos de forma inteligente e entregamos valores que você não encontra facilmente.</p>
+        </div>
+        <div class="feature">
+          <div class="feature__icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l2.5 2.5" opacity="0"/><path d="M9 12l2 2 4-4"/></svg></div>
+          <h3>Transparência total</h3>
+          <p>Explicamos exatamente como funciona. Sem segredos, sem letras miúdas.</p>
+        </div>
+        <div class="feature">
+          <div class="feature__icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.6 8.6 0 0 1-3.3-.7L3 21l1.8-5.7A8.4 8.4 0 1 1 21 11.5z"/></svg></div>
+          <h3>Suporte humano rápido</h3>
+          <p>Atendimento real, feito por quem entende do assunto. Resposta rápida no WhatsApp.</p>
+        </div>
+        <div class="feature">
+          <div class="feature__icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div>
+          <h3>Focado em quem sai de Manaus</h3>
+          <p>Sabemos as rotas que mais interessam quem viaja daqui.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Resultados Reais -->
+  <section class="section section--alt">
+    <div class="container">
+      <span class="eyebrow">Resultados reais</span>
+      <h2 class="section-title">Exemplos reais de passagens que encontramos</h2>
+      <p class="section-sub">Valores de referência encontrados recentemente para quem sai de Manaus. Peça sua cotação atualizada no WhatsApp.</p>
+      <div class="routes">
+        <div class="route-card">
+          <span class="pill">MAO → GRU</span>
+          <h3>São Paulo</h3>
+          <div class="from">saindo de Manaus</div>
+          <div class="price"><small>a partir de</small><br>R$ <b>389</b></div>
+          <div class="obs">Valor de referência · sujeito a disponibilidade</div>
+          <a href="#" class="btn btn--teal js-wa" data-msg="Olá! Vi no site Manaus → São Paulo a partir de R$ 389. Pode cotar pra mim?">Quero esse preço</a>
+        </div>
+        <div class="route-card">
+          <span class="pill">MAO → GIG</span>
+          <h3>Rio de Janeiro</h3>
+          <div class="from">saindo de Manaus</div>
+          <div class="price"><small>a partir de</small><br>R$ <b>459</b></div>
+          <div class="obs">Valor de referência · sujeito a disponibilidade</div>
+          <a href="#" class="btn btn--teal js-wa" data-msg="Olá! Vi no site Manaus → Rio de Janeiro a partir de R$ 459. Pode cotar pra mim?">Quero esse preço</a>
+        </div>
+        <div class="route-card">
+          <span class="pill">MAO → FOR</span>
+          <h3>Fortaleza</h3>
+          <div class="from">saindo de Manaus</div>
+          <div class="price"><small>a partir de</small><br>R$ <b>489</b></div>
+          <div class="obs">Valor de referência · sujeito a disponibilidade</div>
+          <a href="#" class="btn btn--teal js-wa" data-msg="Olá! Vi no site Manaus → Fortaleza a partir de R$ 489. Pode cotar pra mim?">Quero esse preço</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Como funciona (teaser) -->
+  <section class="section">
+    <div class="container">
+      <div class="how-teaser">
+        <div>
+          <span class="eyebrow">Como funciona</span>
+          <h2>Como a SkipTravel consegue preços mais baixos?</h2>
+          <p>A gente combina dois trechos de voo de forma inteligente. Você utiliza só o que precisa (ida ou volta) e paga bem menos.</p>
+          <a href="#como-funciona" data-nav="como-funciona" class="btn btn--teal">Quero entender como funciona →</a>
+        </div>
+        <div class="how-teaser__visual">
+          <div class="leg leg--used">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 12l7-2 4-7 2 1-2 7 6 2 1 2-8 1-3 5-2-1 1-5-6-1z"/></svg>
+            Trecho 1 · MAO → GRU <span class="tag">VOCÊ USA</span>
+          </div>
+          <div class="leg leg--skip">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 12l7-2 4-7 2 1-2 7 6 2 1 2-8 1-3 5-2-1 1-5-6-1z"/></svg>
+            Trecho 2 · combinação <span class="tag">DISPENSADO</span>
+          </div>
+          <div class="leg leg--used" style="border-color:var(--gold);background:rgba(232,168,56,.1)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E8A838" stroke-width="1.5"><path d="M12 2l2.4 6.9H21l-5.3 4 2 7.1-5.7-4.3L6.3 20l2-7.1L3 8.9h6.6z"/></svg>
+            Resultado: você paga bem menos
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Depoimentos -->
+  <section class="section section--alt">
+    <div class="container">
+      <span class="eyebrow">Depoimentos</span>
+      <h2 class="section-title">Quem já voou com a gente</h2>
+      <p class="section-sub">Experiências reais de clientes que economizaram saindo de Manaus.</p>
+      <div class="testimonials">
+        <div class="tcard">
+          <div class="stars">★★★★★</div>
+          <p>"Achei que era bom demais pra ser verdade, mas o atendimento explicou tudo direitinho. Paguei R$ 389 pra São Paulo e o bilhete chegou na hora."</p>
+          <div class="who"><div class="avatar">CM</div><div><strong>Camila M.</strong><small>Manaus → São Paulo</small></div></div>
+        </div>
+        <div class="tcard">
+          <div class="stars">★★★★★</div>
+          <p>"Atendimento rápido demais no WhatsApp. Em menos de uma hora já estava com as opções na mão e escolhi a melhor pra mim."</p>
+          <div class="who"><div class="avatar">RS</div><div><strong>Rafael S.</strong><small>Manaus → Rio de Janeiro</small></div></div>
+        </div>
+        <div class="tcard">
+          <div class="stars">★★★★★</div>
+          <p>"O que mais gostei foi a transparência. Me explicaram como o preço fica mais barato antes mesmo de eu perguntar. Recomendo!"</p>
+          <div class="who"><div class="avatar">JA</div><div><strong>Juliana A.</strong><small>Manaus → Fortaleza</small></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA final -->
+  <div class="cta-final">
+    <h2>Pronto para voar pagando menos?</h2>
+    <p>Fale agora com nosso time no WhatsApp e receba sua cotação em minutos.</p>
+    <a href="#" class="btn btn--teal btn--lg js-wa" data-msg="Olá! Quero uma cotação de passagem com a SkipTravel ✈️">Consultar Passagem Agora</a>
+  </div>
+</section>
+<!-- ===================== PÁGINA: COMO FUNCIONA ===================== -->
+<section class="page" id="page-como-funciona">
+  <div class="page-hero">
+    <div class="container">
+      <span class="eyebrow">O método</span>
+      <h1>Como Funciona a SkipTravel</h1>
+      <p>Entenda o método que faz suas passagens saírem mais baratas — explicado sem jargão e sem letras miúdas.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="problem-solution">
+        <div class="ps-card ps-card--problem">
+          <div class="num">01</div>
+          <h3>O problema do preço normal</h3>
+          <p>As companhias aéreas vendem passagens com preços altos porque seguem regras rígidas de tarifa. Quem compra do jeito tradicional acaba pagando mais.</p>
+        </div>
+        <div class="ps-card ps-card--solution">
+          <div class="num">02</div>
+          <h3>Nossa solução</h3>
+          <p>A SkipTravel combina dois trechos de voo de forma inteligente. Você compra a passagem completa, mas viaja apenas no trecho que interessa (ida ou volta).</p>
+        </div>
+      </div>
+      <div class="result-strip">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg>
+        <div><strong>Resultado: você paga muito menos.</strong><br>Mesma companhia aérea, mesmo voo, mesmo assento — só o preço muda.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <span class="eyebrow">Passo a passo</span>
+      <h2 class="section-title">Do pedido ao bilhete em 4 passos</h2>
+      <p class="section-sub">Sem cadastro, sem aplicativo, sem complicação. Tudo pelo WhatsApp.</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.6 8.6 0 0 1-3.3-.7L3 21l1.8-5.7A8.4 8.4 0 1 1 21 11.5z"/></svg></div>
+          <h3>Você nos conta</h3>
+          <p>Diz o destino, datas e se quer só ida, ida e volta ou só volta.</p>
+        </div>
+        <div class="step">
+          <div class="step__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
+          <h3>A gente pesquisa</h3>
+          <p>Buscamos as melhores combinações de trechos disponíveis.</p>
+        </div>
+        <div class="step">
+          <div class="step__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8"/><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/></svg></div>
+          <h3>Você escolhe</h3>
+          <p>Mostramos as opções com preços e horários. Você decide qual é melhor.</p>
+        </div>
+        <div class="step">
+          <div class="step__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="10" rx="2"/><path d="M7 8V6a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2M3 13h18" opacity=".5"/></svg></div>
+          <h3>Reservamos</h3>
+          <p>Finalizamos a compra e te enviamos todos os bilhetes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <span class="eyebrow">Exemplos reais</span>
+      <h2 class="section-title">Passagens que já encontramos</h2>
+      <p class="section-sub">Valores de referência. Peça a cotação do dia no WhatsApp.</p>
+      <div class="routes">
+        <div class="route-card">
+          <span class="pill">MAO → GRU</span>
+          <h3>São Paulo</h3>
+          <div class="from">saindo de Manaus</div>
+          <div class="price"><small>a partir de</small><br>R$ <b>389</b></div>
+          <div class="obs">Exemplo real encontrado pela equipe</div>
+          <a href="#" class="btn btn--teal js-wa" data-msg="Olá! Quero cotar Manaus → São Paulo (vi R$ 389 no site).">Cotar agora</a>
+        </div>
+        <div class="route-card">
+          <span class="pill">MAO → GIG</span>
+          <h3>Rio de Janeiro</h3>
+          <div class="from">saindo de Manaus</div>
+          <div class="price"><small>a partir de</small><br>R$ <b>459</b></div>
+          <div class="obs">Exemplo real encontrado pela equipe</div>
+          <a href="#" class="btn btn--teal js-wa" data-msg="Olá! Quero cotar Manaus → Rio de Janeiro (vi R$ 459 no site).">Cotar agora</a>
+        </div>
+        <div class="route-card">
+          <span class="pill">MAO → FOR</span>
+          <h3>Fortaleza</h3>
+          <div class="from">saindo de Manaus</div>
+          <div class="price"><small>a partir de</small><br>R$ <b>489</b></div>
+          <div class="obs">Exemplo real encontrado pela equipe</div>
+          <a href="#" class="btn btn--teal js-wa" data-msg="Olá! Quero cotar Manaus → Fortaleza (vi R$ 489 no site).">Cotar agora</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <div class="center">
+        <span class="eyebrow">Dúvidas frequentes</span>
+        <h2 class="section-title">Perguntas Frequentes</h2>
+        <p class="section-sub">Se a sua dúvida não estiver aqui, é só chamar no WhatsApp.</p>
+      </div>
+      <div class="faq">
+        <div class="faq-item">
+          <button type="button">É seguro?<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
+          <div class="answer"><p>Sim. Todas as passagens são emitidas por companhias aéreas oficiais, no seu nome, com localizador válido que você pode conferir direto no site da companhia.</p></div>
+        </div>
+        <div class="faq-item">
+          <button type="button">Posso alterar as datas?<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
+          <div class="answer"><p>Sim, dentro das regras de cada tarifa. Nosso time te informa as condições antes de você fechar a compra.</p></div>
+        </div>
+        <div class="faq-item">
+          <button type="button">Funciona para viagens internacionais?<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
+          <div class="answer"><p>Sim. Atendemos rotas nacionais e internacionais. Conta pra gente o destino que buscamos a melhor combinação.</p></div>
+        </div>
+        <div class="faq-item">
+          <button type="button">Como recebo meus bilhetes?<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
+          <div class="answer"><p>Depois da reserva confirmada, enviamos todos os bilhetes e o localizador direto no seu WhatsApp e e-mail.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-final">
+    <h2>Entendeu o método? Agora é só economizar.</h2>
+    <p>Manda seu destino e suas datas que a gente encontra a melhor combinação pra você.</p>
+    <a href="#" class="btn btn--teal btn--lg js-wa" data-msg="Olá! Entendi como funciona e quero uma cotação ✈️">Falar com a SkipTravel</a>
+  </div>
+</section>
+
+<!-- ===================== PÁGINA: PASSAGENS ===================== -->
+<section class="page" id="page-passagens">
+  <div class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Ofertas</span>
+      <h1>Passagens em destaque</h1>
+      <p>Rotas mais buscadas por quem sai de Manaus, com valores de referência. Escolha a sua e finalize no WhatsApp.</p>
+    </div>
+  </div>
+  <section class="section">
+    <div class="container">
+      <div id="dealsList"></div>
+    </div>
+  </section>
+  <div class="cta-final">
+    <h2>Não achou seu destino?</h2>
+    <p>A gente cota qualquer rota, nacional ou internacional. É só chamar.</p>
+    <a href="#" class="btn btn--teal btn--lg js-wa" data-msg="Olá! Quero cotar um destino que não está no site.">Cotar outro destino</a>
+  </div>
+</section>
+
+<!-- ===================== PÁGINA: SOBRE NÓS ===================== -->
+<section class="page" id="page-sobre">
+  <div class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Sobre nós</span>
+      <h1>Estratégia que leva você mais longe</h1>
+      <p>Somos uma agência de Manaus criada para fazer o amazonense voar mais pagando menos.</p>
+    </div>
+  </div>
+  <section class="section">
+    <div class="container about-grid">
+      <div>
+        <span class="eyebrow">Nossa história</span>
+        <h2 class="section-title">Nascemos em Manaus, voamos para o mundo</h2>
+        <p>A SkipTravel nasceu de uma inquietação simples: por que quem sai de Manaus paga tão caro para voar? Decidimos estudar o mercado a fundo e encontramos um jeito inteligente de combinar trechos para derrubar o preço final.</p>
+        <p>Hoje ajudamos viajantes de toda a região a chegar mais longe — com atendimento humano, explicação clara de cada etapa e bilhetes emitidos pelas companhias aéreas oficiais.</p>
+        <p>Nada de robô, nada de letra miúda. Você fala com gente de verdade, entende exatamente o que está comprando e economiza de verdade.</p>
+        <a href="#" class="btn btn--navy js-wa" data-msg="Olá! Quero conhecer melhor a SkipTravel.">Falar com nosso time</a>
+      </div>
+      <div class="stats">
+        <div class="stat"><strong>+1.500</strong><span>cotações realizadas</span></div>
+        <div class="stat"><strong>até 45%</strong><span>de economia média</span></div>
+        <div class="stat"><strong>100%</strong><span>bilhetes em cias oficiais</span></div>
+        <div class="stat"><strong>&lt; 1h</strong><span>tempo médio de resposta</span></div>
+      </div>
+    </div>
+  </section>
+  <section class="section section--alt">
+    <div class="container">
+      <div class="center">
+        <span class="eyebrow">Nossos valores</span>
+        <h2 class="section-title">No que a gente acredita</h2>
+      </div>
+      <div class="values">
+        <div class="feature">
+          <div class="feature__icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
+          <h3>Transparência</h3>
+          <p>Explicamos o método antes de você comprar. Você decide com toda a informação na mão.</p>
+        </div>
+        <div class="feature">
+          <div class="feature__icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+          <h3>Atendimento humano</h3>
+          <p>Cada cliente é atendido por uma pessoa real, que conhece as rotas e responde rápido.</p>
+        </div>
+        <div class="feature">
+          <div class="feature__icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l7-2 4-7 2 1-2 7 6 2 1 2-8 1-3 5-2-1 1-5-6-1z"/></svg></div>
+          <h3>Economia real</h3>
+          <p>Nosso trabalho só faz sentido se você pagar menos do que pagaria sozinho.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="cta-final">
+    <h2>Vamos planejar sua próxima viagem?</h2>
+    <p>Conta pra gente o destino. O resto é com a SkipTravel.</p>
+    <a href="#" class="btn btn--teal btn--lg js-wa" data-msg="Olá! Quero planejar minha próxima viagem com a SkipTravel ✈️">Começar agora</a>
+  </div>
+</section>
+</main>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <a class="logo" href="#home" data-nav="home">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#4ABFB0" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l7-2 4-7 2 1-2 7 6 2 1 2-8 1-3 5-2-1 1-5-6-1z"/></svg>
+          SKIP<span>TRAVEL</span>
+        </a>
+        <p class="tagline">Estratégia que leva você mais longe. Passagens aéreas com preços inteligentes, saindo de Manaus para o Brasil e o mundo.</p>
+        <div class="footer__social">
+          <a href="https://instagram.com/skiptravel" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".9" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="#" class="js-wa" data-msg="Olá! Vim pelo site da SkipTravel." aria-label="WhatsApp">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm5.4 14.1c-.2.7-1.3 1.3-1.8 1.3-.5.1-1.1.1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.4.2.5.7 1.8.8 1.9.1.1.1.3 0 .4-.1.2-.1.3-.3.5l-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1.2-.2.7-.8.9-1.1.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div>
+        <h4>Navegação</h4>
+        <a href="#home" data-nav="home">Início</a>
+        <a href="#como-funciona" data-nav="como-funciona">Como Funciona</a>
+        <a href="#passagens" data-nav="passagens">Passagens</a>
+        <a href="#sobre" data-nav="sobre">Sobre Nós</a>
+      </div>
+      <div>
+        <h4>Destinos populares</h4>
+        <a href="#" class="js-wa" data-msg="Olá! Quero cotar Manaus → São Paulo.">São Paulo</a>
+        <a href="#" class="js-wa" data-msg="Olá! Quero cotar Manaus → Rio de Janeiro.">Rio de Janeiro</a>
+        <a href="#" class="js-wa" data-msg="Olá! Quero cotar Manaus → Fortaleza.">Fortaleza</a>
+        <a href="#" class="js-wa" data-msg="Olá! Quero cotar Manaus → Brasília.">Brasília</a>
+      </div>
+      <div>
+        <h4>Atendimento</h4>
+        <a href="#" class="js-wa" data-msg="Olá! Vim pelo site da SkipTravel.">WhatsApp (configurar número)</a>
+        <a href="https://instagram.com/skiptravel" target="_blank" rel="noopener">@skiptravel</a>
+        <a href="#">Manaus, Amazonas — Brasil</a>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© <span id="year"></span> <b>SkipTravel</b> — Todos os direitos reservados.</span>
+      <span>Passagens emitidas por companhias aéreas oficiais.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ===================== WHATSAPP FLUTUANTE ===================== -->
+<a href="#" class="wa-float js-wa" data-msg="Olá! Vim pelo site e quero falar com a SkipTravel ✈️" aria-label="Falar no WhatsApp">
+  <span class="tooltip">Fale com a gente!</span>
+  <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm5.4 14.1c-.2.7-1.3 1.3-1.8 1.3-.5.1-1.1.1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.4.2.5.7 1.8.8 1.9.1.1.1.3 0 .4-.1.2-.1.3-.3.5l-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1.2-.2.7-.8.9-1.1.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg>
+</a>
+
+<script>
+/* ==========================================================================
+   ⚙️ CONFIGURAÇÃO — ÚNICO LUGAR PARA EDITAR
+   Troque o número abaixo pelo WhatsApp oficial da SkipTravel.
+   Formato: código do país + DDD + número, só dígitos. Ex.: 5592991234567
+   ========================================================================== */
+const SKIP_CONFIG = {
+  whatsappNumber: "5592900000000",   // ← CONFIGURAR AQUI o número da empresa
+  defaultMessage: "Olá! Vim pelo site da SkipTravel e quero uma cotação ✈️"
+};
+
+/* Gera o link wa.me com mensagem pré-preenchida */
+function waLink(msg){
+  const text = encodeURIComponent(msg || SKIP_CONFIG.defaultMessage);
+  return "https://wa.me/" + SKIP_CONFIG.whatsappNumber + "?text=" + text;
+}
+
+/* Aplica o link a TODOS os elementos .js-wa (botões fixos do HTML) */
+document.querySelectorAll(".js-wa").forEach(el => {
+  el.addEventListener("click", e => {
+    e.preventDefault();
+    window.open(waLink(el.dataset.msg), "_blank", "noopener");
+  });
+});
+
+/* ==========================================================================
+   NAVEGAÇÃO SPA (Home / Como Funciona / Passagens / Sobre)
+   ========================================================================== */
+const PAGES = ["home","como-funciona","passagens","sobre"];
+
+function navigate(page, push = true){
+  if(!PAGES.includes(page)) page = "home";
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+  document.getElementById("page-" + page).classList.add("active");
+  document.querySelectorAll(".nav a[data-nav]").forEach(a => {
+    a.classList.toggle("active", a.dataset.nav === page);
+  });
+  document.getElementById("nav").classList.remove("open");
+  if(push) history.pushState(null, "", "#" + page);
+  window.scrollTo(0, 0);
+}
+
+document.querySelectorAll("[data-nav]").forEach(a => {
+  a.addEventListener("click", e => { e.preventDefault(); navigate(a.dataset.nav); });
+});
+window.addEventListener("popstate", () => navigate(location.hash.replace("#","") || "home", false));
+navigate(location.hash.replace("#","") || "home", false);
+
+/* Menu mobile */
+document.getElementById("burger").addEventListener("click", () => {
+  document.getElementById("nav").classList.toggle("open");
+});
+
+/* ==========================================================================
+   VITRINE DE PASSAGENS — valores de referência (página Passagens)
+   ========================================================================== */
+const VOOS = [
+  {destino:"São Paulo",      iata:"GRU", preco:389, cia:"LATAM", horario:"07:30"},
+  {destino:"Rio de Janeiro", iata:"GIG", preco:459, cia:"GOL",   horario:"09:15"},
+  {destino:"Fortaleza",      iata:"FOR", preco:489, cia:"AZUL",  horario:"11:00"},
+  {destino:"Brasília",       iata:"BSB", preco:359, cia:"GOL",   horario:"06:45"},
+  {destino:"Recife",         iata:"REC", preco:529, cia:"LATAM", horario:"14:20"},
+  {destino:"Belém",          iata:"BEL", preco:339, cia:"AZUL",  horario:"08:10"},
+  {destino:"Salvador",       iata:"SSA", preco:549, cia:"LATAM", horario:"10:40"}
+];
+
+function flightCard(v, origem, tipo, data){
+  const dataTxt = data ? new Date(data + "T12:00").toLocaleDateString("pt-BR") : "data a combinar";
+  const msg = "Olá! Pesquisei no site: " + origem + " → " + v.destino + " (" + tipo + ", " + dataTxt + ") a partir de R$ " + v.preco + ". Pode confirmar a cotação?";
+  return '<div class="flight">' +
+    '<div><div class="flight__route">' + origem +
+    ' <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg> ' +
+    v.destino + ' <small style="font-weight:600;color:#7b8aa3">(' + v.iata + ')</small></div>' +
+    '<div class="flight__meta">' + dataTxt + ' · ' + v.horario + ' · ' + v.cia + ' · ' + tipo + '</div></div>' +
+    '<div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap">' +
+    '<div class="flight__price"><small>a partir de</small><strong>R$ <b>' + v.preco + '</b></strong></div>' +
+    '<a href="#" class="btn btn--teal js-wa-dyn" data-msg="' + msg.replace(/"/g,'&quot;') + '">Garantir no WhatsApp</a>' +
+    '</div></div>';
+}
+
+/* Botões de WhatsApp criados dinamicamente (busca / vitrine de passagens) */
+function bindDynamicWa(){
+  document.querySelectorAll(".js-wa-dyn").forEach(el => {
+    if(el.dataset.bound) return;
+    el.dataset.bound = "1";
+    el.addEventListener("click", e => {
+      e.preventDefault();
+      window.open(waLink(el.dataset.msg), "_blank", "noopener");
+    });
+  });
+}
+
+/* ==========================================================================
+   BUSCA MUNDIAL — autocomplete de aeroportos + API real (backend /api)
+   Sem backend rodando ou sem chave Amadeus → cai no fluxo de cotação WhatsApp
+   ========================================================================== */
+const API_BASE = ""; // backend Node no mesmo domínio (server.js)
+
+/* Fallback local p/ autocomplete funcionar mesmo sem o servidor */
+const AIRPORTS_LOCAL = [
+  {iata:"SAO",city:"São Paulo (todos os aeroportos)",country:"Brasil"},
+  {iata:"RIO",city:"Rio de Janeiro (todos os aeroportos)",country:"Brasil"},
+  {iata:"MAO",city:"Manaus",country:"Brasil"},{iata:"GRU",city:"São Paulo (Guarulhos)",country:"Brasil"},
+  {iata:"CGH",city:"São Paulo (Congonhas)",country:"Brasil"},{iata:"GIG",city:"Rio de Janeiro (Galeão)",country:"Brasil"},
+  {iata:"SDU",city:"Rio de Janeiro (Santos Dumont)",country:"Brasil"},{iata:"BSB",city:"Brasília",country:"Brasil"},
+  {iata:"FOR",city:"Fortaleza",country:"Brasil"},{iata:"REC",city:"Recife",country:"Brasil"},
+  {iata:"SSA",city:"Salvador",country:"Brasil"},{iata:"BEL",city:"Belém",country:"Brasil"},
+  {iata:"CNF",city:"Belo Horizonte",country:"Brasil"},{iata:"POA",city:"Porto Alegre",country:"Brasil"},
+  {iata:"CWB",city:"Curitiba",country:"Brasil"},{iata:"FLN",city:"Florianópolis",country:"Brasil"},
+  {iata:"NAT",city:"Natal",country:"Brasil"},{iata:"MCZ",city:"Maceió",country:"Brasil"},
+  {iata:"BVB",city:"Boa Vista",country:"Brasil"},{iata:"PVH",city:"Porto Velho",country:"Brasil"},
+  {iata:"MIA",city:"Miami",country:"Estados Unidos"},{iata:"MCO",city:"Orlando",country:"Estados Unidos"},
+  {iata:"JFK",city:"Nova York",country:"Estados Unidos"},{iata:"LAX",city:"Los Angeles",country:"Estados Unidos"},
+  {iata:"YYZ",city:"Toronto",country:"Canadá"},{iata:"MEX",city:"Cidade do México",country:"México"},
+  {iata:"CUN",city:"Cancún",country:"México"},{iata:"PTY",city:"Cidade do Panamá",country:"Panamá"},
+  {iata:"PUJ",city:"Punta Cana",country:"República Dominicana"},{iata:"EZE",city:"Buenos Aires",country:"Argentina"},
+  {iata:"SCL",city:"Santiago",country:"Chile"},{iata:"LIM",city:"Lima",country:"Peru"},
+  {iata:"BOG",city:"Bogotá",country:"Colômbia"},{iata:"MVD",city:"Montevidéu",country:"Uruguai"},
+  {iata:"LIS",city:"Lisboa",country:"Portugal"},{iata:"OPO",city:"Porto",country:"Portugal"},
+  {iata:"MAD",city:"Madri",country:"Espanha"},{iata:"BCN",city:"Barcelona",country:"Espanha"},
+  {iata:"CDG",city:"Paris",country:"França"},{iata:"LHR",city:"Londres",country:"Reino Unido"},
+  {iata:"AMS",city:"Amsterdã",country:"Holanda"},{iata:"FRA",city:"Frankfurt",country:"Alemanha"},
+  {iata:"FCO",city:"Roma",country:"Itália"},{iata:"IST",city:"Istambul",country:"Turquia"},
+  {iata:"DXB",city:"Dubai",country:"Emirados Árabes"},{iata:"DOH",city:"Doha",country:"Catar"},
+  {iata:"JNB",city:"Joanesburgo",country:"África do Sul"},{iata:"NRT",city:"Tóquio",country:"Japão"},
+  {iata:"ICN",city:"Seul",country:"Coreia do Sul"},{iata:"BKK",city:"Bangkok",country:"Tailândia"},
+  {iata:"SIN",city:"Singapura",country:"Singapura"},{iata:"SYD",city:"Sydney",country:"Austrália"}
+];
+
+const normTxt = s => s.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
+
+async function searchAirports(q){
+  try{
+    const r = await fetch(API_BASE + "/api/airports?q=" + encodeURIComponent(q));
+    if(r.ok){ const d = await r.json(); if(Array.isArray(d) && d.length) return d; }
+  }catch(_){ /* backend offline → usa base local */ }
+  const nq = normTxt(q);
+  return AIRPORTS_LOCAL.filter(a =>
+    normTxt(a.city).includes(nq) || a.iata.toLowerCase() === nq || normTxt(a.country).includes(nq)
+  ).slice(0,8);
+}
+
+/* Autocomplete nos campos Origem/Destino */
+function attachAC(inputId, listId){
+  const input = document.getElementById(inputId);
+  const list  = document.getElementById(listId);
+  let timer = null;
+  input.addEventListener("input", () => {
+    delete input.dataset.iata;
+    clearTimeout(timer);
+    const q = input.value.trim();
+    if(q.length < 2){ list.classList.remove("show"); return; }
+    timer = setTimeout(async () => {
+      const items = await searchAirports(q);
+      if(!items.length){ list.classList.remove("show"); return; }
+      list.innerHTML = items.map(a =>
+        '<div class="ac-item" data-iata="' + a.iata + '" data-label="' + a.city + ' (' + a.iata + ')">' +
+        '<div>' + a.city + '<small>' + a.country + '</small></div><b>' + a.iata + '</b></div>'
+      ).join("");
+      list.classList.add("show");
+      list.querySelectorAll(".ac-item").forEach(it => {
+        it.addEventListener("mousedown", ev => {
+          ev.preventDefault();
+          input.value = it.dataset.label;
+          input.dataset.iata = it.dataset.iata;
+          list.classList.remove("show");
+        });
+      });
+    }, 220);
+  });
+  input.addEventListener("blur", () => setTimeout(() => list.classList.remove("show"), 160));
+}
+attachAC("fOrigem","acOrigem");
+attachAC("fDestino","acDestino");
+
+async function resolveIata(input){
+  if(input.dataset.iata) return input.dataset.iata;
+  const m = input.value.match(/\(([A-Za-z]{3})\)/);
+  if(m) return m[1].toUpperCase();
+  const items = await searchAirports(input.value.trim());
+  return items.length ? items[0].iata : null;
+}
+
+/* Abas de tipo de viagem */
+let tripType = "idaVolta";
+document.querySelectorAll(".trip-tab").forEach(t => t.addEventListener("click", () => {
+  document.querySelectorAll(".trip-tab").forEach(x => x.classList.remove("active"));
+  t.classList.add("active");
+  tripType = t.dataset.trip;
+  const showVolta = tripType === "idaVolta";
+  document.getElementById("fieldVolta").style.display = showVolta ? "" : "none";
+  document.getElementById("searchForm").classList.toggle("no-volta", !showVolta);
+}));
+
+/* Inverter origem/destino */
+document.getElementById("swapBtn").addEventListener("click", () => {
+  const o = document.getElementById("fOrigem"), d = document.getElementById("fDestino");
+  const tv = o.value; o.value = d.value; d.value = tv;
+  const oi = o.dataset.iata, di = d.dataset.iata;
+  if(di) o.dataset.iata = di; else delete o.dataset.iata;
+  if(oi) d.dataset.iata = oi; else delete d.dataset.iata;
+});
+
+/* Datas mínimas = hoje; volta nunca antes da ida */
+(function(){
+  const today = new Date().toISOString().slice(0,10);
+  const fData = document.getElementById("fData");
+  const fVolta = document.getElementById("fVolta");
+  fData.min = today; fVolta.min = today;
+  fData.addEventListener("change", () => {
+    if(fData.value){
+      fVolta.min = fData.value;
+      if(fVolta.value && fVolta.value < fData.value) fVolta.value = fData.value;
+    }
+  });
+})();
+
+/* Formatadores */
+const fmtMoney = (v, cur) => Number(v).toLocaleString("pt-BR",{style:"currency",currency:cur || "BRL"});
+const fmtTime = iso => iso ? iso.slice(11,16) : "";
+const fmtDate = iso => iso ? iso.slice(0,10).split("-").reverse().join("/") : "";
+function fmtDur(d){
+  const m = /PT(?:(\d+)H)?(?:(\d+)M)?/.exec(d || "");
+  return m ? ((m[1] ? m[1] + "h " : "") + (m[2] ? m[2] + "min" : "")).trim() : "";
+}
+
+/* Card de oferta real (API) */
+function offerCard(o, routeTxt, paxTxt){
+  const msg = "Olá! Encontrei no site: " + routeTxt + " por " + fmtMoney(o.price, o.currency) +
+    " (" + o.carrier + ", " + fmtDate(o.departure) + " " + fmtTime(o.departure) + ", " +
+    (o.stops === 0 ? "voo direto" : o.stops + " parada(s)") + ", " + paxTxt + "). Quero garantir essa tarifa!";
+  return '<div class="flight"><div><div class="flight__route">' + routeTxt + '</div>' +
+    '<div class="flight__meta">' + fmtDate(o.departure) + " · " + fmtTime(o.departure) + " → " + fmtTime(o.arrival) +
+    " · " + o.carrier + " · " + (o.stops === 0 ? "Voo direto" : o.stops + " parada(s)") +
+    (fmtDur(o.duration) ? " · " + fmtDur(o.duration) : "") + (o.hasReturn ? " · ida e volta" : "") +
+    '</div></div><div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap">' +
+    '<div class="flight__price"><small>total · ' + paxTxt + '</small><strong>' + fmtMoney(o.price, o.currency) + '</strong></div>' +
+    '<a href="#" class="btn btn--teal js-wa-dyn" data-msg="' + msg.replace(/"/g,"&quot;") + '">Garantir no WhatsApp</a></div></div>';
+}
+
+/* Card de cotação via WhatsApp (API off / sem resultado) */
+function quoteCard(routeTxt, detalhe, titulo){
+  const msg = "Olá! Quero cotar " + routeTxt + " (" + detalhe + "). Pode me ajudar?";
+  return '<div class="notice">' +
+    '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>' +
+    '<div><strong>' + (titulo || "Cotação personalizada com nosso time.") + '</strong> ' +
+    'A gente busca a melhor combinação pra essa rota agora mesmo no WhatsApp — normalmente em minutos.</div></div>' +
+    '<div class="flight"><div><div class="flight__route">' + routeTxt + '</div>' +
+    '<div class="flight__meta">' + detalhe + '</div></div>' +
+    '<a href="#" class="btn btn--teal js-wa-dyn" data-msg="' + msg.replace(/"/g,"&quot;") + '">Pedir cotação no WhatsApp</a></div>';
+}
+
+/* Submit da busca mundial */
+document.getElementById("searchForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const box  = document.getElementById("results");
+  const oIn  = document.getElementById("fOrigem");
+  const dIn  = document.getElementById("fDestino");
+  const pax  = document.getElementById("fPax").value;
+  const paxTxt = pax + " adulto" + (pax > 1 ? "s" : "");
+  let ida    = document.getElementById("fData").value;
+  let volta  = document.getElementById("fVolta").value;
+
+  if(!dIn.value.trim()){ dIn.focus(); return; }
+
+  box.classList.add("show");
+  box.innerHTML = '<div class="loading"><div class="spinner"></div>Buscando as melhores tarifas no mundo todo…</div>';
+  box.scrollIntoView({behavior:"smooth", block:"nearest"});
+
+  if(!ida){ const t = new Date(); t.setDate(t.getDate() + 14); ida = t.toISOString().slice(0,10); }
+  if(tripType === "idaVolta" && (!volta || volta < ida)){
+    /* volta vazia ou antes da ida → corrige automaticamente para ida + 7 dias */
+    const t = new Date(ida + "T12:00"); t.setDate(t.getDate() + 7); volta = t.toISOString().slice(0,10);
+    document.getElementById("fVolta").value = volta;
+  }
+
+  const tipoTxt  = {idaVolta:"ida e volta", ida:"somente ida", volta:"somente volta"}[tripType];
+  const routeTxt = oIn.value.replace(/\s*\([A-Za-z]{3}\)/,"") + " → " + dIn.value.replace(/\s*\([A-Za-z]{3}\)/,"");
+  const detalhe  = tipoTxt + " · " + ida.split("-").reverse().join("/") +
+    (tripType === "idaVolta" ? " a " + volta.split("-").reverse().join("/") : "") + " · " + paxTxt;
+
+  const [oI, dI] = await Promise.all([resolveIata(oIn), resolveIata(dIn)]);
+  if(!oI || !dI){
+    box.innerHTML = quoteCard(routeTxt, detalhe, "Não achei esse aeroporto na base — sem problema.");
+    bindDynamicWa(); return;
+  }
+
+  try{
+    const p = new URLSearchParams({origin:oI, destination:dI, date:ida, adults:pax});
+    if(tripType === "idaVolta" && volta) p.set("returnDate", volta);
+    const r = await fetch(API_BASE + "/api/flights?" + p.toString());
+    const d = await r.json();
+    if(d.configured && d.offers && d.offers.length){
+      box.innerHTML = "<h3>Melhores tarifas encontradas ✈️ <small style='font-weight:600;font-size:13px;color:#7b8aa3'>(" + detalhe + ")</small></h3>" +
+        d.offers.map(o => offerCard(o, routeTxt, paxTxt)).join("");
+    } else if(d.configured){
+      box.innerHTML = quoteCard(routeTxt, detalhe, "Nenhuma tarifa online para essas datas.");
+    } else {
+      box.innerHTML = quoteCard(routeTxt, detalhe);
+    }
+  }catch(_){
+    /* Backend offline (ex.: arquivo aberto sem servidor) → fluxo WhatsApp */
+    box.innerHTML = quoteCard(routeTxt, detalhe);
+  }
+  bindDynamicWa();
+});
+
+/* Vitrine completa da página Passagens */
+document.getElementById("dealsList").innerHTML =
+  VOOS.map(v => flightCard(v, "Manaus", "Só ida", "")).join("");
+bindDynamicWa();
+
+/* Ano do footer */
+document.getElementById("year").textContent = new Date().getFullYear();
+
+/* ==========================================================================
+   FAQ — acordeão
+   ========================================================================== */
+document.querySelectorAll(".faq-item button").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const item = btn.parentElement;
+    const wasOpen = item.classList.contains("open");
+    document.querySelectorAll(".faq-item").forEach(i => i.classList.remove("open"));
+    if(!wasOpen) item.classList.add("open");
+  });
+});
+
+console.log("%cSkipTravel ✈ site carregado", "color:#4ABFB0;font-weight:bold");
+</script>
+
+</body>
+</html>

@@ -1,0 +1,11 @@
+{
+  "name": "skiptravel-backend",
+  "version": "1.0.0",
+  "description": "Backend de busca de voos da SkipTravel — autocomplete mundial + integração Amadeus",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "engines": { "node": ">=18" }
+}
